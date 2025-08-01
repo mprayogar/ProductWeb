@@ -30,7 +30,7 @@ public class Login : PageModel
 
         var loginRequest = new models.LoginRequest
         {
-            Username = Username,        // Isi sesuai input dari form
+            Username = Username,        
             Password = Password
         };
 

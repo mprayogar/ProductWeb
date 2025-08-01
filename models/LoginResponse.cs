@@ -12,6 +12,5 @@ namespace ProductWeb.models
         public string AccessToken { get; set; } = string.Empty;
         public string? RefreshToken { get; set; }
         public DateTime? Expiration { get; set; }
-        // Tambahkan properti lain sesuai response dari API kamu
     }
 }

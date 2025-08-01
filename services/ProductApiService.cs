@@ -27,7 +27,7 @@ namespace ProductWeb.Services
 
                 if (httpResponse.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                 {
-                    // Bisa return null atau lempar custom exception
+                    
                     return null;
                 }
 
@@ -38,7 +38,7 @@ namespace ProductWeb.Services
             }
             catch
             {
-                // Log atau tangani error lain jika perlu
+                
                 return new();
             }
         }

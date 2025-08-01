@@ -25,7 +25,7 @@ namespace ProductWeb.Pages
             var token = HttpContext.Session.GetString("token");
             if (string.IsNullOrEmpty(token))
             {
-                return RedirectToPage("/Login"); // atau Redirect("/Login")
+                return RedirectToPage("/Login"); 
             }
 
             var handler = new HttpClientHandler();
@@ -55,12 +55,12 @@ namespace ProductWeb.Pages
 
             if (httpResponse.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
-                return RedirectToPage("/Login"); // arahkan ke halaman login jika tidak authorized
+                return RedirectToPage("/Login"); 
             }
 
             if (!httpResponse.IsSuccessStatusCode)
             {
-                // Bisa ditambahkan error handling lain jika perlu
+                
                 Products = new List<Product>();
                 return Page();
             }
@@ -105,7 +105,7 @@ namespace ProductWeb.Pages
                 TempData["Error"] = $"Gagal menghapus produk: {error}";
             }
 
-            return RedirectToPage(); // Refresh halaman Index
+            return RedirectToPage(); 
         }
 
 

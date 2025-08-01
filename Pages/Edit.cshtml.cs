@@ -38,12 +38,12 @@ namespace ProductWeb.Pages
 
             if (httpResponse.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
-                return RedirectToPage("/Login"); // atau ke route login yang kamu pakai
+                return RedirectToPage("/Login"); 
             }
 
             if (!httpResponse.IsSuccessStatusCode)
             {
-                // Opsional: handle error lain (misalnya 404, 500, dll)
+                
                 ModelState.AddModelError(string.Empty, "Gagal mengambil data produk.");
                 return Page();
             }
@@ -83,7 +83,7 @@ namespace ProductWeb.Pages
                 return RedirectToPage("/Index");
             }
 
-            // Tambahkan ini untuk menampilkan pesan error dari API
+            
             var errorContent = await response.Content.ReadAsStringAsync();
             ModelState.AddModelError(string.Empty, $"Gagal update produk: {errorContent}");
 

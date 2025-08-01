@@ -16,11 +16,11 @@ namespace ProductWeb.Pages
             var token = HttpContext.Session.GetString("token");
             if (string.IsNullOrEmpty(token))
             {
-                // Belum login, redirect ke halaman login
+               
                 return RedirectToPage("/Login");
             }
 
-            return Page(); // lanjut tampilkan form create
+            return Page(); 
         }
 
 
