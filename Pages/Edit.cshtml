@@ -1,0 +1,55 @@
+@page
+@model ProductWeb.Pages.EditModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit Produk</h1>
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+            <p>@error.ErrorMessage</p>
+        }
+    </div>
+}
+
+<form method="post" class="card p-4 shadow-sm border-0" style="max-width: 500px;">
+    <input type="hidden" asp-for="Product.Id" />
+
+    <h3 class="mb-4">Form Produk</h3>
+
+    <div class="mb-3">
+        <label asp-for="Product.Name" class="form-label">Nama Produk</label>
+        <input asp-for="Product.Name" class="form-control" />
+        <span asp-validation-for="Product.Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Product.Description" class="form-label">Deskripsi</label>
+        <input asp-for="Product.Description" class="form-control" />
+        <span asp-validation-for="Product.Description" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Product.Price" class="form-label">Harga</label>
+        <input asp-for="Product.Price" class="form-control" />
+        <span asp-validation-for="Product.Price" class="text-danger"></span>
+    </div>
+
+    <div class="d-flex gap-2">
+    <button type="submit" class="btn btn-primary">💾 Simpan</button>
+    <a asp-page="/Index" class="btn btn-secondary">↩️ Batal</a>
+</div>
+
+</form>
+
+
+<div>
+    
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

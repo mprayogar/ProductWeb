@@ -1,0 +1,34 @@
+@page
+@model ProductWeb.Pages.ProductsModel
+@{
+    ViewData["Title"] = "Products";
+}
+
+<h2>Product List</h2>
+
+<form method="post">
+    <input asp-for="NewProduct.Name" placeholder="Name" />
+    <input asp-for="NewProduct.Description" placeholder="Description" />
+    <input asp-for="NewProduct.Price" placeholder="Price" />
+    <button type="submit">Add</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <thead>Namesss</th>
+            <th>Description</th>
+            <th>Price</th>
+            </tr>
+            </thead>
+    <tbody>
+        @foreach (var product in Model.Products)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+                <td>@product.Price</td>
+            </tr>
+        }
+    </tbody>
+</table>
