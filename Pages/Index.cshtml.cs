@@ -24,9 +24,10 @@ namespace ProductWeb.Pages
         {
             var token = HttpContext.Session.GetString("token");
             if (string.IsNullOrEmpty(token))
-            {
-                return RedirectToPage("/Login"); 
-            }
+{
+    Console.WriteLine("DEBUG: Token kosong, redirect ke login.");
+    return RedirectToPage("/Login");
+}
 
             var handler = new HttpClientHandler();
             handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;

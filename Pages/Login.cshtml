@@ -1,4 +1,4 @@
-@page
+@* @page
 @model ProductWeb.Pages.Login
 @{
     Layout = null; 
@@ -21,16 +21,22 @@
             <div class="col-md-4">
                 <div class="card shadow-sm">
                     <div class="card-body">
-                        <h4 class="card-title text-center mb-4">Login</h4>
+                        <h4 class="card-title text-center mb-4">
+                            @(Model.IsRegistering ? "Register" : "Login")
+                        </h4>
 
                         @if (!string.IsNullOrEmpty(Model.ErrorMessage))
                         {
-                            <div class="alert alert-danger" role="alert">
-                                @Model.ErrorMessage
-                            </div>
+                            <div class="alert alert-danger">@Model.ErrorMessage</div>
+                        }
+
+                        @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+                        {
+                            <div class="alert alert-success">@Model.SuccessMessage</div>
                         }
 
                         <form method="post">
+                            <input type="hidden" asp-for="IsRegistering" />
                             <div class="mb-3">
                                 <label class="form-label">Username</label>
                                 <input asp-for="Username" class="form-control" />
@@ -39,7 +45,22 @@
                                 <label class="form-label">Password</label>
                                 <input asp-for="Password" type="password" class="form-control" />
                             </div>
-                            <button type="submit" class="btn btn-primary w-100">Login</button>
+                            @if (Model.IsRegistering)
+                            {
+                                <div class="mb-3">
+                                    <label class="form-label">Confirm Password</label>
+                                    <input asp-for="ConfirmPassword" type="password" class="form-control" />
+                                </div>
+                            }
+                            <button type="submit" class="btn btn-primary w-100">
+                                @(Model.IsRegistering ? "Register" : "Login")
+                            </button>
+                        </form>
+                        <form method="post" class="text-center mt-3">
+                            <button name="@(Model.IsRegistering ? "ToggleLogin" : "ToggleRegister")" 
+                                    class="btn btn-link" type="submit">
+                                @(Model.IsRegistering ? "Sudah punya akun? Login" : "Belum punya akun? Register")
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -52,4 +73,89 @@
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
     </script>
 </body>
+</html> *@
+
+
+@page
+@model ProductWeb.Pages.Login
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@(Model.IsRegistering ? "Register" : "Login") - Product Web</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h4 class="card-title text-center mb-4">@if (Model.IsRegistering) { <text>Register</text> } else { <text>Login</text> }</h4>
+
+                        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                        {
+                            <div class="alert alert-danger" role="alert">
+                                @Model.ErrorMessage
+                            </div>
+                        }
+
+                        @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+                        {
+                            <div class="alert alert-success text-center" role="alert">
+                                @Model.SuccessMessage
+                            </div>
+                        }
+
+
+                        <!-- Form untuk Login dan Register -->
+                        <form method="post">
+    <input type="hidden" asp-for="IsRegistering" /> <!-- Tambahkan ini -->
+
+    <div class="mb-3">
+        <label class="form-label">Username</label>
+        @* <input asp-for="Username" class="form-control" required /> *@
+        <input name="Username" value="@Model.Username" class="form-control" required />
+
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input asp-for="Password" type="password" class="form-control" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">
+        @(Model.IsRegistering ? "Register" : "Login")
+    </button>
+</form>
+
+
+                        <!-- Form Toggle Login/Register -->
+                        <form method="post" class="text-center mt-3">
+                            @if (Model.IsRegistering)
+                            {
+                                <input type="hidden" name="ToggleLogin" value="true" />
+                                <button class="btn btn-link" type="submit">Sudah punya akun? Login</button>
+                            }
+                            else
+                            {
+                                <input type="hidden" name="ToggleRegister" value="true" />
+                                <button class="btn btn-link" type="submit">Belum punya akun? Register</button>
+                            }
+                        </form>
+                    </div>
+                </div>
+                <p class="text-center mt-3 text-muted">© 2025 Product Web</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
+
